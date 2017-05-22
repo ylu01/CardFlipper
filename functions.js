@@ -1,9 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 //WHY DO I KEEP MAKING SIMPLE MISTAKES? 
 //I PUT ONCLICK="REMOVEC" INSTEAD OF ONCLICK=REMOVEC()"\
@@ -22,11 +16,20 @@ var picSet = ["pic.jpg","pic.jpg","2.jpg","2.jpg","3.jpg","3.jpg","4.jpg","4.jpg
 var finishedSets = []; //finished id's go here
 var match; //set flag for match
 var pairsFinished; 
-
+var answerPanel, answerGrid;
+var answerIndex, answerPic;
 //debug function
 function show(){
+    
     alert(countFlipped);
 }
+function reveal(){
+    alert("fuck you");
+    $(document).ready(function(){
+        $("#a0").fadeTo(3000,0.9);
+    });
+}
+
 function flip(el) {
     var temp = "#" + $(el).attr("id");
     if(countFlipped === 0){
@@ -47,6 +50,13 @@ function flip(el) {
         if(document.getElementById(id1+"p").src === document.getElementById(id2 + "p").src){
             pairsFinished++;
             $(document).ready(fadeAway(id1,id2));
+            answerPic = document.createElement("img");
+            answerPic.src = document.getElementById(id1+"p").src;
+            answerPic.setAttribute("id", "i" + answerIndex);
+            document.getElementById("a"+answerIndex).style.opacity = "0";
+            document.getElementById("a"+answerIndex).appendChild(answerPic);
+            $(document).ready(fadeUp("a"+answerIndex));
+            answerIndex++;
             finishedSets.push(id1);
             finishedSets.push(id2);
             if(pairsFinished === 8){
@@ -66,6 +76,10 @@ function fadeAway(id, id1){
     var temp1 = "#" + id1;
     $( temp ).fadeTo( 2000, 0.01 );
     $( temp1 ).fadeTo( 2000, 0.01 );
+}
+function fadeUp(id){
+    var tempId = "#" + id;
+    $(tempId).fadeTo(2000, 0.9);
 }
 function disableAll(){
     for(var count1 = 0; count1 < 16; count1++){
@@ -135,6 +149,7 @@ function enableC(){
 function makeBoard(){
     match =0;
     pairsFinished = 0;
+    answerIndex = 0;
     tempArr = picSet;
     shuffle(tempArr);
     board = document.createElement("div");
@@ -163,7 +178,15 @@ function makeBoard(){
         tempArr.shift();
         gridBack.appendChild(gridPicBack);
     }
-    
+    answerPanel = document.createElement("div");
+    answerPanel.setAttribute("class","answersPanel");
+    document.body.appendChild(answerPanel);
+    for(var answerCount = 0; answerCount < 8; answerCount++){
+        answerGrid = document.createElement("div");
+        answerGrid.setAttribute("class","answersGrid");
+        answerGrid.setAttribute("id", "a"+answerCount);
+        answerPanel.appendChild(answerGrid);
+    }
 }
 
 //taken from stack overflow
