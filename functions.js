@@ -1,7 +1,4 @@
 
-//WHY DO I KEEP MAKING SIMPLE MISTAKES? 
-//I PUT ONCLICK="REMOVEC" INSTEAD OF ONCLICK=REMOVEC()"\
-
 var board;
 var grid;
 var gridPicFront;
@@ -18,18 +15,17 @@ var match; //set flag for match
 var pairsFinished; 
 var answerPanel, answerGrid;
 var answerIndex, answerPic;
-//debug function
+//debug functions
 function show(){
     
     alert(countFlipped);
 }
 function reveal(){
-    alert("fuck you");
     $(document).ready(function(){
         $("#a0").fadeTo(3000,0.9);
     });
 }
-
+//regular functions
 function flip(el) {
     var temp = "#" + $(el).attr("id");
     if(countFlipped === 0){
@@ -48,7 +44,7 @@ function flip(el) {
     if(countFlipped === 2){
        
         if(document.getElementById(id1+"p").src === document.getElementById(id2 + "p").src){
-            pairsFinished++;
+            pairsFinished++; //there should be 8 pairs when finished.
             $(document).ready(fadeAway(id1,id2));
             answerPic = document.createElement("img");
             answerPic.src = document.getElementById(id1+"p").src;
@@ -87,40 +83,29 @@ function disableAll(){
         
         
     }
-    //alert("match = " + match);
-   
     setTimeout(enableAll, 1000);
 }
 
 function enableAll(){
-    //alert("ID1 = " + id1 + "ID2 = " + id2);
     var n = "#"+id1+","+"#"+id2;
     if(match !== 1){
         $(n).toggleClass('flipped');
     }
-     
-    //$("#" + id2).toggleClass('flipped');
-    
     countFlipped = 0;
     id1 = "";
     id2 = "";
     match = 0;
-    //alert(document.getElementById("card2"));
     if(finishedSets.length > 0){
-        //alert(document.getElementById("card"+count2 + "p").src);
         for(var count2 = 0; count2 < 16; count2++){
             if(check("card"+count2) === 0){
                 document.getElementById("card"+count2).style.pointerEvents = 'auto';
             }
-        //document.getElementById("card"+count2).style.pointerEvents = 'auto';
         }
     }
     else{
         for(var count3 = 0; count3 < 16; count3++){
-            //alert("fuck you");
             document.getElementById("card"+count3).style.pointerEvents = 'auto';
         }
-        //document.getElementById("card"+count2).style.pointerEvents = 'auto';
     }
     
     }
@@ -136,16 +121,13 @@ function check(arr){
     return 0;
 }
 
-function enableC(){
-    document.getElementById('card').style.pointerEvents = 'auto';
-}
 /*
  * container div
  *   click div
  *     front div
  *     back div
  * */
- 
+ //make and initialize the board, and set/resetting some flags
 function makeBoard(){
     match =0;
     pairsFinished = 0;
