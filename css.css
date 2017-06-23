@@ -1,4 +1,8 @@
-
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
 /* 
     Created on : 11-May-2017, 2:47:17 PM
     Author     : Yang
@@ -19,6 +23,10 @@ h2{
     -webkit-perspective: 800px;
     -moz-perspective: 800px;
     -o-perspective: 800px;
+    background: -webkit-linear-gradient(left, #c7cacc, #1e5b5b);
+    background: -moz-linear-gradient(right, #3e779d, #1e5b5b);
+    background: -ms-linear-gradient(bottom, #3e779d, #1e5b5b);
+    background: -o-linear-gradient(top, #3e779d, #1e5b5b);
     perspective: 80;
 }
 img{
@@ -108,6 +116,11 @@ img:hover{
     background-color:black;
 }
 .answersPanel{
+    
+    background: -webkit-linear-gradient(top, #c7cacc, #5bcccc);
+    background: -moz-linear-gradient(top, #3e779d, #5bcccc);
+    background: -ms-linear-gradient(top, #3e779d, #5bcccc);
+    background: -o-linear-gradient(top, #3e779d, #5bcccc);
     background-color:black;
     border-radius:5px;
     width:336px;
